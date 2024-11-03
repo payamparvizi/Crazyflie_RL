@@ -15,11 +15,20 @@ from .utils import calculate_discounted_rewards
 from crazyflie_env.crazyflie_env import CrazyflieHoverEnv
 from torch.distributions import Normal, Independent
 from utils.compute_sm import compute_sm
+import argparse
+from utils.arguments import get_args
 
 class PPOAgent:
     def __init__(self, env, policy_lr=1e-4, value_lr=1e-3, gamma=0.99, clip_epsilon=0.2, 
                  update_epochs=10, target_altitude=1.0, entropy_c=0, hidden_size_p=64,
-                 hidden_size_v=64, ar_case=0, noise_a2ps=1e-12, c_homog=10, lambda_P=1e-2):
+                 hidden_size_v=64, ar_case=0, noise_a2ps=1e-12, c_homog=10, lambda_P=1e-2,
+                 task='simulation', seed_value=10):
+        
+        torch.manual_seed(seed_value)
+        np.random.seed(seed_value)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed(seed_value)
+            torch.cuda.manual_seed_all(seed_value)
         
         self.env = env
         self.gamma = gamma
@@ -27,6 +36,7 @@ class PPOAgent:
         self.update_epochs = update_epochs
         self.target_altitude = target_altitude
         self.entropy_c = entropy_c
+        self.task = task
         
         self.ar_case = ar_case
         self.noise_a2ps = noise_a2ps
@@ -179,15 +189,17 @@ class PPOAgent:
         """Save the policy network to a file."""
         torch.save(self.policy_net.state_dict(), file_path)
         print(f"Policy network saved ....")
-
-
-    def wait_for_manual_reconnection(self, max_steps_per_episode):
-        """Wait for the user to manually reconnect the Crazyflie."""
-        target_altitude = self.target_altitude   # Target altitude in meters
-        env = CrazyflieHoverEnv(target_altitude=target_altitude, max_steps=max_steps_per_episode)
+        
+        
+    def wait_for_manual_reconnection(self, args: argparse.Namespace = get_args()):
+        env = CrazyflieHoverEnv(target_altitude=args.target_altitude, max_steps=args.max_steps,
+                                alpha=args.alpha, noise_threshold=args.noise_threshold, 
+                                r_max=args.r_max, k_rew=args.k_rew, r_stab=args.r_stab, 
+                                action_range=args.action_range, lag_factor=args.lag_factor, 
+                                task=args.task, seed_value=args.seed)
+        
         self.env = env
         input("Press Enter to start the next episode...")
-        
         
     def train(self, max_episodes=1000, max_steps=100, resume_from=False):
         """Train the PPO agent with manual reconnection after crashes."""
@@ -230,9 +242,6 @@ class PPOAgent:
                 
                 # If the episode is done (e.g., Crazyflie crashes or reaches the end of the episode), stop the Crazyflie and break
                 if done:
-                    # print(f"Episode {episode + 1} done after {step + 1}/{max_steps} steps")
-                    # self.env.commander.send_stop_setpoint()  # Stop the Crazyflie
-                    # sleep(1)  # Allow some time for it to stop
                     break
 
             # Calculate the returns and advantages
@@ -265,20 +274,19 @@ class PPOAgent:
             
             print(f"Episode {episode + 1} done after {step + 1}/{max_steps} steps with total reward: {total_reward}")
             
-            # choice = input("Press 'R' to reboot Crazyflie, or 'C' to continue without reboot: ").upper()
-            # if choice == 'R':
-            #     # print("Please manually reboot the Crazyflie and reconnect.")
-            #     input("Please manually reboot the Crazyflie. If done, press Enter ...")
-            #     self.wait_for_manual_reconnection(max_steps)  # Wait for the user to manually reconnect
-                
-            # elif choice == 'C':
-            #     input("Press Enter to start the next episode...")
+            if self.task == 'real':
+                choice = input("Press 'R' to reboot Crazyflie, or 'C' to continue without reboot: ").upper()
+                if choice == 'R':
+                    # print("Please manually reboot the Crazyflie and reconnect.")
+                    input("Please manually reboot the Crazyflie. If done, press Enter ...")
+                    self.wait_for_manual_reconnection(get_args())
+                    
+                elif choice == 'C':
+                    input("Press Enter to start the next episode...")
 
-            # Reset the Crazyflie before the next episode begins
-            self.env.reset()
-            # sleep(1)  # Allow time for the Crazyflie to stabilize after reset
-            
-            # os.system('clear')
+                # Reset the Crazyflie before the next episode begins
+                self.env.reset()
+
 
 
 

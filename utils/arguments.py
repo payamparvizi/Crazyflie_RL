@@ -4,6 +4,7 @@ import torch
 
 def get_args():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--task", type=str, default='simulation')   # 'simulation' or 'real'
     parser.add_argument("--seed", type=int, default=36)
     parser.add_argument("--max_steps", type=int, default=100)
     parser.add_argument("--max_episodes", type=int, default=500)
