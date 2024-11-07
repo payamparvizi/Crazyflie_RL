@@ -40,7 +40,7 @@ for ar1 in ${arg1[@]}
 do
 for ar2 in ${arg2[@]}
 do
-for ar3 in ${arg3@]}
+for ar3 in ${arg3[@]}
 do
 COUNTER=$[$COUNTER +1]
 params[$COUNTER]={$ar1,$ar2,$ar3,esults_arg1_${ar1}_arg2_${ar2}_arg3${ar3}
