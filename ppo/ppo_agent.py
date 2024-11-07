@@ -22,7 +22,7 @@ class PPOAgent:
     def __init__(self, env, policy_lr=1e-4, value_lr=1e-3, gamma=0.99, clip_epsilon=0.2, 
                  update_epochs=10, target_altitude=1.0, entropy_c=0, hidden_size_p=64,
                  hidden_size_v=64, ar_case=0, noise_a2ps=1e-12, c_homog=10, lambda_P=1e-2,
-                 task='simulation', seed_value=10):
+                 task='simulation', seed_value=10, lambda_T=0.1, lambda_S=0.1, sigma_s_bar=0.1):
         
         torch.manual_seed(seed_value)
         np.random.seed(seed_value)
@@ -42,6 +42,10 @@ class PPOAgent:
         self.noise_a2ps = noise_a2ps
         self.c_homog = c_homog
         self.lambda_P = lambda_P
+        
+        self.lambda_T = lambda_T
+        self.lambda_S = lambda_S
+        self.sigma_s_bar = sigma_s_bar
 
         # Networks
         self.policy_net = PolicyNetwork(input_dim=2, action_dim=1, hidden_size=hidden_size_p)  # 1 state input (altitude), 2 action outputs (up or down)
@@ -120,6 +124,24 @@ class PPOAgent:
         J_pym = self.lambda_P * DP
         return J_pym.mean()
 
+    def ar_caps_fun(self, states, next_states):
+        
+        mean, act, _ = self.action_sampling(states)
+        mean_next, act_next, _ = self.action_sampling(next_states)
+        
+        obs = states.squeeze()
+        obs_next = next_states.squeeze()
+
+        obs_bar = obs + self.sigma_s_bar * torch.randn_like(obs)
+
+        mean_bar, act_bar, _ = self.action_sampling(obs_bar)
+        
+        # calculate the Euclidean distance for temporal and spatial smoothness:
+        DT = torch.norm(mean - mean_next, p=2, dim=-1)
+        DS = torch.norm(mean - mean_bar, p=2, dim=-1)
+        
+        J_caps = self.lambda_T * DT + self.lambda_S * DS
+        return J_caps.mean()
 
     def update_policy(self, states, actions, old_log_probs, returns, advantages, rewards, next_states):
         """Update the policy using PPO."""
@@ -152,8 +174,12 @@ class PPOAgent:
             
             if self.ar_case == 0:
                 policy_loss = loss
-                
+            
             elif self.ar_case == 1:
+                J_caps = self.ar_caps_fun(states, next_states)
+                policy_loss = loss + J_caps
+                
+            elif self.ar_case == 2:
                 J_a2ps = self.ar_a2ps_fun(states, next_states)
                 policy_loss = loss + J_a2ps
 

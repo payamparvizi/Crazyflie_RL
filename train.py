@@ -15,7 +15,7 @@ from ppo.ppo_agent import PPOAgent  # Import your PPOAgent class
 
 def train_(args: argparse.Namespace = get_args()) -> None:
     
-    wandb.init(project="crazyflie-ppo", config=vars(args))
+    wandb.init(project="crazyflie-ppo_caps", config=vars(args))
     
     seed_value = args.seed
     torch.manual_seed(seed_value)
@@ -40,7 +40,8 @@ def train_(args: argparse.Namespace = get_args()) -> None:
                      clip_epsilon=args.clip_epsilon, update_epochs=args.update_epochs, target_altitude=target_altitude,
                      entropy_c=args.entropy_c, hidden_size_p=args.hidden_size_p, hidden_size_v=args.hidden_size_v,
                      ar_case=args.ar_case, noise_a2ps=args.noise_a2ps, c_homog=args.c_homog,
-                     lambda_P=args.lambda_P, task=args.task, seed_value=seed_value)
+                     lambda_P=args.lambda_P, task=args.task, seed_value=seed_value,
+                     lambda_T=args.lambda_T, lambda_S=args.lambda_S, sigma_s_bar=args.sigma_s_bar)
     
     # Step 3: Start training and load the saved policy from "policies_saved/policy_net.pth"
     agent.train(max_episodes=max_episodes, max_steps=max_steps, resume_from=False)
