@@ -43,7 +43,7 @@ do
 for ar3 in ${arg3[@]}
 do
 COUNTER=$[$COUNTER +1]
-params[$COUNTER]={$ar1,$ar2,$ar3,esults_arg1_${ar1}_arg2_${ar2}_arg3${ar3}
+params[$COUNTER]={$ar1,$ar2,$ar3,esults_arg1_${ar1}_arg2_${ar2}_arg3${ar3}}
 done
 done
 done
@@ -54,6 +54,6 @@ IFS=',' read -r -a array <<< "${ids:1:${#ids}-2}"
 
 echo ${array[0]}
 echo ${array[1]}
-echo ${array[2}
+echo ${array[2}}
 
 python3 train.py --seed ${array[0]} --ar_case ${array[1]} --lambda_T ${array[2]}
