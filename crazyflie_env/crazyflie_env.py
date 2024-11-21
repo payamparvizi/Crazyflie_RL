@@ -120,22 +120,9 @@ class CrazyflieHoverEnv:
         if self.task == 'real':
             # PowerSwitch(self.uri).stm_power_cycle()
             sleep(5)
-            # self.mc = MotionCommander(self.scf)
-            # sleep(1)
-            # self.commander.send_stop_setpoint()
-            # sleep(1)
             self.mc.take_off(0.1, 0.2)
             sleep(1)
-            # self.mc.move_distance(1, 0, 0, 0.5)
-            # sleep(5)
-            # self.mc.move_distance(-1, 0, 0, 0.5)
-            # sleep(5)
-            # self.mc.move_distance(0, 1, 0, 0.5)
-            # sleep(5)
-            # self.mc.move_distance(0, -1, 0, 0.5)
-            # sleep(5)
-            # self.mc.land()
-            # sleep(10)
+
             
         
         elif self.task == 'simulation':
