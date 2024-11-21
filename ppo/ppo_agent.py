@@ -10,16 +10,18 @@ import wandb
 import torch
 import torch.optim as optim
 import numpy as np
-from .networks import PolicyNetwork, ValueNetwork
+from .networks import PolicyNetwork#, ValueNetwork
 from .utils import calculate_discounted_rewards
 from crazyflie_env.crazyflie_env import CrazyflieHoverEnv
 from torch.distributions import Normal, Independent
 from utils.compute_sm import compute_sm
 import argparse
 from utils.arguments import get_args
+import os
+import pickle
 
 class PPOAgent:
-    def __init__(self, env, policy_lr=1e-4, value_lr=1e-3, gamma=0.99, clip_epsilon=0.2, 
+    def __init__(self, env, policy_lr=1e-4, value_ratio=0.5, gamma=0.99, clip_epsilon=0.2, 
                  update_epochs=10, target_altitude=1.0, entropy_c=0, hidden_size_p=64,
                  hidden_size_v=64, ar_case=0, noise_a2ps=1e-12, c_homog=10, lambda_P=1e-2,
                  task='simulation', seed_value=10, lambda_T=0.1, lambda_S=0.1, sigma_s_bar=0.1):
@@ -46,14 +48,16 @@ class PPOAgent:
         self.lambda_T = lambda_T
         self.lambda_S = lambda_S
         self.sigma_s_bar = sigma_s_bar
+        
+        self.value_ratio = value_ratio
 
         # Networks
         self.policy_net = PolicyNetwork(input_dim=2, action_dim=1, hidden_size=hidden_size_p)  # 1 state input (altitude), 2 action outputs (up or down)
-        self.value_net = ValueNetwork(input_dim=2, hidden_size=hidden_size_v)  # 1 state input (altitude)
+        # self.value_net = ValueNetwork(input_dim=2, hidden_size=hidden_size_v)  # 1 state input (altitude)
         
         # Optimizers
         self.policy_optimizer = optim.Adam(self.policy_net.parameters(), lr=policy_lr)
-        self.value_optimizer = optim.Adam(self.value_net.parameters(), lr=value_lr)
+        # self.value_optimizer = optim.Adam(self.value_net.parameters(), lr=value_lr)
     
     def choose_action(self, state):
         state = torch.FloatTensor(state).unsqueeze(0)  # Ensure state is a tensor
@@ -67,14 +71,14 @@ class PPOAgent:
     def compute_advantages(self, returns, states):
         returns = torch.FloatTensor(returns).unsqueeze(0)
         states = torch.FloatTensor(states).unsqueeze(0)
-        values = self.value_net(states)
+        _, _, values = self.policy_net(states)
         advantages = returns - values.detach()
         
         return advantages
         
     
     def action_sampling(self, obs):
-        (mean, log_std) = self.policy_net(obs)
+        (mean, log_std, _) = self.policy_net(obs)
         mean = mean.squeeze()
         std = torch.exp(log_std.squeeze())
         
@@ -157,7 +161,7 @@ class PPOAgent:
             _, log_probs, entropy = self.policy_net.evaluate(states, actions)
             
             # Get state value from the value network
-            state_values = self.value_net(states)
+            _, _, state_values = self.policy_net(states)
     
             # Compute the ratio of new and old probabilities
             ratios = torch.exp(log_probs - old_log_probs.detach())  # Detach old_log_probs to avoid modifying the original tensor
@@ -170,7 +174,12 @@ class PPOAgent:
             surr1 = ratios * advantages
             surr2 = torch.clamp(ratios, 1.0 - self.clip_epsilon, 1.0 + self.clip_epsilon) * advantages
 
-            loss = -torch.min(surr1, surr2).mean() - self.entropy_c * entropy.mean()
+            # Compute the value loss
+            returns_tensor = torch.FloatTensor(returns).squeeze()  # Squeeze removes any extra dimensions
+            state_values_tensor = torch.FloatTensor(state_values).squeeze()
+            value_loss = torch.nn.MSELoss()(state_values_tensor, returns_tensor)
+
+            loss = -torch.min(surr1, surr2).mean() - self.entropy_c * entropy.mean() + self.value_ratio * value_loss
             
             if self.ar_case == 0:
                 policy_loss = loss
@@ -182,22 +191,16 @@ class PPOAgent:
             elif self.ar_case == 2:
                 J_a2ps = self.ar_a2ps_fun(states, next_states)
                 policy_loss = loss + J_a2ps
-
-            returns_tensor = torch.FloatTensor(returns).squeeze()  # Squeeze removes any extra dimensions
-            state_values_tensor = torch.FloatTensor(state_values).squeeze()
-            
-            # Compute the value loss
-            value_loss = torch.nn.MSELoss()(state_values_tensor, returns_tensor)
     
             # Update policy network
             self.policy_optimizer.zero_grad()
             policy_loss.backward(retain_graph=True)  # Retain graph for multiple backward passes
             self.policy_optimizer.step()
     
-            # Update value network
-            self.value_optimizer.zero_grad()
-            value_loss.backward()  # No need to retain graph here
-            self.value_optimizer.step()
+            # # Update value network
+            # self.value_optimizer.zero_grad()
+            # value_loss.backward()  # No need to retain graph here
+            # self.value_optimizer.step()
             
             self.policy_loss = policy_loss
             self.value_loss = value_loss
@@ -216,7 +219,25 @@ class PPOAgent:
         torch.save(self.policy_net.state_dict(), file_path)
         print(f"Policy network saved ....")
         
+    
+    def load_metadata(self, file_path="metadata.pkl"):
+        if os.path.exists(file_path):
+            with open(file_path, 'rb') as file:
+                metadata = pickle.load(file)
+        else:
+            metadata = []
         
+        return metadata
+        
+    
+    def save_metadata(self, total_reward, act_fluc, policy_loss, value_loss, average_altitude, metadata, file_path):
+        
+        x = [total_reward, act_fluc.item(), policy_loss.item(), value_loss.item(), average_altitude]
+        metadata.append(x)
+        with open(file_path, 'wb') as file:  # 'wb' mode for writing in binary
+            pickle.dump(metadata, file)
+
+    
     def wait_for_manual_reconnection(self, args: argparse.Namespace = get_args()):
         env = CrazyflieHoverEnv(target_altitude=args.target_altitude, max_steps=args.max_steps,
                                 alpha=args.alpha, noise_threshold=args.noise_threshold, 
@@ -225,13 +246,14 @@ class PPOAgent:
                                 task=args.task, seed_value=args.seed)
         
         self.env = env
-        input("Press Enter to start the next episode...")
         
     def train(self, max_episodes=1000, max_steps=100, resume_from=False):
         """Train the PPO agent with manual reconnection after crashes."""
         
         if resume_from:
             self.load_policy("policies_saved/policy_net.pth")
+            
+        metadata = self.load_metadata("metadata_saved/metadata.pkl")
         
         for episode in range(max_episodes):
             # os.system('clear')
@@ -247,6 +269,7 @@ class PPOAgent:
             values = []
             next_values = []
             total_reward = 0
+            total_altitude = 0
             
             for step in range(max_steps):
                 # Choose an action and get the log probability from the policy
@@ -256,6 +279,9 @@ class PPOAgent:
                 # Step the environment and get the next state, reward, and whether the episode is done
                 state, reward, done, _ = self.env.step(action)
                 
+                if step > int(max_steps*3/4 - 1):
+                    total_altitude += abs(state[0] - 1)
+                    
                 next_state = state
                 
                 # Store trajectory data
@@ -270,6 +296,8 @@ class PPOAgent:
                 if done:
                     break
 
+            average_altitude = total_altitude/(int(max_steps/4))
+            # print(average_altitude)
             # Calculate the returns and advantages
             returns = calculate_discounted_rewards(rewards, self.gamma)  # You already have a function for this
             
@@ -280,38 +308,61 @@ class PPOAgent:
             advantages = self.compute_advantages(returns, states)  # Calculate advantages
             # advantages = self.compute_advantages(rewards, states)  # Calculate advantages
             
-            if step >= int(max_steps/4):
+            if (step+1) == max_steps:
                 # Update the policy and value networks with PPO
                 self.update_policy(states, actions, log_probs, returns, advantages, rewards, next_states)
                 
-                if episode%10 == 0:
-                    smoothness_value = compute_sm(self.env, self.policy_net)
-                    self.save_policy(f"policies_saved/policy_net.pth")
+                wandb.log({"total_reward": total_reward,
+                            # "steps": step, 
+                           "action_fluctuation": self.act_fluc,
+                           # "K_mean": self.K_mean,
+                           # "K_act": self.K_act,
+                            "policy_loss": self.policy_loss,
+                            "value_loss": self.value_loss,
+                           # "smoothness value": smoothness_value,
+                           "average_altitude": average_altitude,
+                          })
                 
-            wandb.log({"total_reward": total_reward,
-                        "steps": step, 
-                       "action_fluctuation": self.act_fluc,
-                       "K_mean": self.K_mean,
-                       "K_act": self.K_act,
-                       "policy_loss": self.policy_loss,
-                       "value_loss": self.policy_loss,
-                       "smoothness value": smoothness_value
-                      })
+                # self.save_metadata(total_reward, self.act_fluc, self.policy_loss, 
+                #                    self.value_loss, average_altitude, metadata, "metadata_saved/metadata.pkl")
+                
+                if self.task == 'simulation':
+                    
+                    if episode%100 == 0:
+                        # smoothness_value = compute_sm(self.env, self.policy_net)
+                        self.save_policy(f"policies_saved/policy_net.pth")
+                
+            # wandb.log({"total_reward": total_reward,
+            #             # "steps": step, 
+            #            "action_fluctuation": self.act_fluc,
+            #            # "K_mean": self.K_mean,
+            #            # "K_act": self.K_act,
+            #             "policy_loss": self.policy_loss,
+            #             "value_loss": self.value_loss,
+            #            # "smoothness value": smoothness_value,
+            #            "average_altitude": average_altitude,
+            #           })
             
             print(f"Episode {episode + 1} done after {step + 1}/{max_steps} steps with total reward: {total_reward}")
             
             if self.task == 'real':
-                choice = input("Press 'R' to reboot Crazyflie, or 'C' to continue without reboot: ").upper()
-                if choice == 'R':
-                    # print("Please manually reboot the Crazyflie and reconnect.")
-                    input("Please manually reboot the Crazyflie. If done, press Enter ...")
-                    self.wait_for_manual_reconnection(get_args())
+                choice = input("Press 'R' to reboot Crazyflie: ").upper()
+                
+                self.save_metadata(total_reward, self.act_fluc, self.policy_loss, 
+                                   self.value_loss, average_altitude, metadata, "metadata_saved/metadata.pkl")
+                
+                self.save_policy(f"policies_saved/policy_net.pth")
+                
+            #     if choice == 'R':
+            #         # print("Please manually reboot the Crazyflie and reconnect.")
+            #         input("Please manually reboot the Crazyflie. If done, press Enter ...")
+            #         self.wait_for_manual_reconnection(get_args())
                     
-                elif choice == 'C':
+                if choice != 'R':
                     input("Press Enter to start the next episode...")
 
-                # Reset the Crazyflie before the next episode begins
-                self.env.reset()
+            #     # Reset the Crazyflie before the next episode begins
+            #     self.env.reset()
 
 
 

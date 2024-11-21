@@ -16,7 +16,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --chdir=/scratch/payamp/
 #SBATCH --signal=B:USR1@30
-#SBATCH --array=1-80
+#SBATCH --array=1-160
 
 module load StdEnv/2020
 module load python/3.9.6
@@ -30,9 +30,11 @@ echo 'running code'
 # Run Python file
 # wandb offline
 
-declare -a arg1=(1 2 3 4 5 6 7 8 9 10)
-declare -a arg2=(1)
-declare -a arg3=(0 1)
+declare -a arg1=(214 215 216 217)
+declare -a arg2=(2)
+declare -a arg3=(5e-3 1e-2 5e-2 1e-1 5e-1 1e0 5e0 0)
+declare -a arg4=(1e2 5e2 1e3 5e3 1e4)
+declare -a arg5=(1e-12)
 
 declare -a params
 COUNTER=0
@@ -42,8 +44,14 @@ for ar2 in ${arg2[@]}
 do
 for ar3 in ${arg3[@]}
 do
+for ar4 in ${arg4[@]}
+do
+for ar5 in ${arg5[@]}
+do
 COUNTER=$[$COUNTER +1]
-params[$COUNTER]={$ar1,$ar2,$ar3,esults_arg1_${ar1}_arg2_${ar2}_arg3${ar3}}
+params[$COUNTER]={$ar1,$ar2,$ar3,$ar4,$ar5,esults_arg1_${ar1}_arg2_${ar2}_arg3${ar3}_arg4${ar4}_arg5${ar5}}
+done
+done
 done
 done
 done
@@ -54,6 +62,8 @@ IFS=',' read -r -a array <<< "${ids:1:${#ids}-2}"
 
 echo ${array[0]}
 echo ${array[1]}
-echo ${array[2}}
+echo ${array[2]}
+echo ${array[3]}
+echo ${array[4]}
 
-python3 train.py --seed ${array[0]} --ar_case ${array[1]} --lambda_T ${array[2]}
+python3 train.py --seed ${array[0]} --ar_case ${array[1]} --lambda_P ${array[2]} --c_homog ${array[3]} --noise_a2ps ${array[4]}
