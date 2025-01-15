@@ -256,3 +256,5 @@ If the FLow Deck connected properly, you will see commands below:
   ```
   Deck is attached!
   ```
+
+Now, we are ready for implementations
