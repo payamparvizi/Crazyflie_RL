@@ -10,4 +10,4 @@ This code implements the PPO algorithm for the Crazyflie 2.1 drone. It includes 
 
 ## Installation Instructions
 
-dasfasdgf
+In this work, we used Linux operating system with Python 3.9.6 version.
