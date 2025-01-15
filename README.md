@@ -168,7 +168,7 @@ Verify that ```tkinter``` is installed by running:
   pip3 install cflib
   ```
   
-  Follow the steps given in the [Step-by-Step: Connecting, logging and parameters](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/user-guides/sbs_connect_log_param/) webpage:
+  Follow the steps given in the [Step-by-Step: Connecting, logging and parameters](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/user-guides/sbs_connect_log_param/) webpage. Let's proceed together!
 
   ```
   import logging
@@ -256,5 +256,7 @@ If the FLow Deck connected properly, you will see commands below:
   ```
   Deck is attached!
   ```
+
+More detailed infomration is provided in [Step-by-Step: Motion Commander](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/user-guides/sbs_motion_commander/)
 
 Now, we are ready for implementations
