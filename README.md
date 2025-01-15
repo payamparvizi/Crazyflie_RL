@@ -49,13 +49,13 @@ Upgrade ```pip``` and install the necessary modules using:
 
   ### 4. Download the Crazyflie Firmware:
 
-  Make sure that you have ```git``` installed. by writing below:
+   Verify that ```git``` is installed by running:
 
   ```
   git --version
   ```
 
-  if not, write:
+  If ```git``` is not installed, use the following commands to install it:
 
   ```
   sudo apt update
