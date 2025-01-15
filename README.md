@@ -13,8 +13,8 @@ This project implements the Proximal Policy Optimization (PPO) algorithm for the
 - Linux Opearating System
 - Crazyflie 2.1
 - Crazyflie Radio
-- Batteries
 - Flow deck v2
+- Batteries
 
 ## Installation Instructions
 
