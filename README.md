@@ -122,3 +122,7 @@ Verify that ```tkinter``` is installed by running:
   ```
 
   If no errors are encountered, the setup is complete.
+
+  #### Compile the Firmware:
+
+  
