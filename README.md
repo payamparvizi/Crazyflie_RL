@@ -121,8 +121,16 @@ Verify that ```tkinter``` is installed by running:
   git submodule update
   ```
 
-  If no errors are encountered, the setup is complete.
+  Make sure no errors encountered
 
   #### Compile the Firmware:
 
+  Compile the firmware using:
+
+  ```
+  make cf2_defconfig
+  make -j$(nproc)
+  ```
+
+  If no errors occur, the setup is complete.
   
