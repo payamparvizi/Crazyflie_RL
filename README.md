@@ -14,8 +14,7 @@ In this work, we used Linux operating system with Python 3.9.20 version. The ins
 
 1. **Create and activate the environment:**
 
-
 ```
 conda create --name crazyflie_env python=3.9.20
-conda activate 
+conda activate crazyflie_env
 ```
