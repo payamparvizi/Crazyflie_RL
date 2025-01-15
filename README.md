@@ -70,4 +70,8 @@ Upgrade ```pip``` and install the necessary modules using:
   mkdir crazyflie_doc
   cd /home/payam/Documents/crazyflie_doc
   ```
+
+  Follow the steps outlined in this [installation guide](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/installation/install/). Let's proceed together!
+
   
+
