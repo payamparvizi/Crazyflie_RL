@@ -99,7 +99,7 @@ Verify that ```tkinter``` is installed by running:
     <img src="https://github.com/user-attachments/assets/e590f081-c63b-4665-8b51-2dfb0ffb7a84" align="center" width="250">
   </p>
 
-  Press "Quit".
+  Press "QUIT".
 
   #### Clone the Firmware Repository:
 
