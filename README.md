@@ -158,7 +158,9 @@ Verify that ```tkinter``` is installed by running:
      - If you move the drone, you will start to see changes in the ```Fligh Data``` part.
   5. We don't need this interface. The only thing we need to get from here is the Crazyflie address (e.g. ```0xE7E7E7E7E7```). We can close this interface.
      
+## Final checks before Implementation
 
+  
 
 
  
