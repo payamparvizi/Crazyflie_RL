@@ -295,14 +295,6 @@ def move_linear_simple(scf):
         mc.forward(0.5)
         time.sleep(1)
 
-
-def take_off_simple(scf):
-    ...
-
-def param_deck_flow(name, value_str):
-   ...
-
-
 if __name__ == '__main__':
     cflib.crtp.init_drivers()
 
