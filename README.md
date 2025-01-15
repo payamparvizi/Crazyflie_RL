@@ -398,7 +398,7 @@ if __name__ == '__main__':
         logconf.stop()
   ```
 
-Also, if interested in Roll, Pitch and Yaw orienations of the Crazyflie, we can write:
+Also, if interested in Roll, Pitch and Yaw orienations of the Crazyflie, replace the position information with orientation, or use both.
 
 ```
 logconf = LogConfig(name='Stabilizer', period_in_ms=10)
@@ -408,5 +408,3 @@ logconf.add_variable('stabilizer.yaw', 'float')
 scf.cf.log.add_config(logconf)
 logconf.data_received_cb.add_callback(log_pos_callback)
 ```
-
-
