@@ -196,4 +196,5 @@ Verify that ```tkinter``` is installed by running:
           simple_connect()
   ```
 
-  If any error encountered, it is most probably from URI. Go back to ```cfclient``` interface and check the ```radio``` and ```address``` information and fix the code accordingly.
+  If any error encountered, it is most probably from URI. Go back to ```cfclient``` interface and check the ```radio``` and ```address``` information and fix the code accordingly. For example, my URI is: ```uri = 'radio://0/100/2M/E7E7E7E704'
+```
