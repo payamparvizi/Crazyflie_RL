@@ -168,7 +168,7 @@ Verify that ```tkinter``` is installed by running:
   pip3 install cflib
   ```
   
-  Follow the steps given in the [Step-by-Step: Connecting, logging and parameters](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/user-guides/sbs_connect_log_param/) webpage.
+  Follow the steps given in the [Step-by-Step: Connecting, logging and parameters](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/user-guides/sbs_connect_log_param/) webpage:
 
   ```
   import logging
@@ -196,5 +196,4 @@ Verify that ```tkinter``` is installed by running:
           simple_connect()
   ```
 
-
- 
+  If any error encountered, it is most probably from URI. Go back to ```cfclient``` interface and check the ```radio``` and ```address``` information and fix the code accordingly.
