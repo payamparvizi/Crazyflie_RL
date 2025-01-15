@@ -319,7 +319,8 @@ if __name__ == '__main__':
         move_linear_simple(scf)
   ```
 
-The other commands for the motion of the Crazyflie can be found in [motion_commander](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/api/cflib/positioning/motion_commander/) webpage.
+The other commands for the motion of the Crazyflie can be found in [motion_commander](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/api/cflib/positioning/motion_commander/) and [commander](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/api/cflib/crazyflie/commander/) webpages.
+
 ### Logging while Flying:
 
 To check the information of the position and oriantation of the Crazyflie, we need to have log to export and analyze it.
