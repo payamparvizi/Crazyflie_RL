@@ -17,4 +17,6 @@ In this work, we used Linux operating system with Python 3.9.20 version. The ins
 ```
 conda create --name crazyflie_env python=3.9.20
 conda activate crazyflie_env
+pip3 install --upgrade pip
 ```
+
