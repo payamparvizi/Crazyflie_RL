@@ -162,6 +162,12 @@ Verify that ```tkinter``` is installed by running:
 
 ### Connecting with a crazyflie:
 
+  Make sure ```cflib``` has been installed. If not, run the following command:
+
+  ```
+  pip3 install cflib
+  ```
+  
   Follow the steps given in the [Step-by-Step: Connecting, logging and parameters](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/user-guides/sbs_connect_log_param/) webpage.
 
   ```
