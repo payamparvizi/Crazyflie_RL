@@ -96,7 +96,7 @@ Verify that ```tkinter``` is installed by running:
   If the installation is successful, you should see the following interface:
 
   <p align="center">
-    <img src="https://github.com/user-attachments/assets/e590f081-c63b-4665-8b51-2dfb0ffb7a84" align="center" width="500">
+    <img src="https://github.com/user-attachments/assets/e590f081-c63b-4665-8b51-2dfb0ffb7a84" align="center" width="250">
   </p>
 
 
