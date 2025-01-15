@@ -47,4 +47,8 @@ Upgrade ```pip``` and install the necessary modules using:
 
   Note: If the command does not work, repeat the steps above until the issue is resolved.
 
+  ### 4. Download the Crazyflie Firmware:
+
+  dsafdsaf
+
   
