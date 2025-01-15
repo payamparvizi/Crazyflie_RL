@@ -79,3 +79,17 @@ Upgrade ```pip``` and install the necessary modules using:
   sudo apt-get install make gcc-arm-none-eabi
   ```
 
+  #### Tkinter Installation:
+
+Verify that ```tkinter``` is installed by running:
+
+  ```
+  python3 -m tkinter
+  ```
+
+  If ```tkinter``` is not installed, use the following commands to install it:
+
+  ```
+  sudo apt install python3-tk
+  ```
+  
