@@ -153,5 +153,10 @@ Verify that ```tkinter``` is installed by running:
       cfclient
       ```
   4. In the cfclient interface, press ```scan```. You will start to see the radio and the drone.
+     - If couldn't find the drone. In the address section write: ```0xE7E7E7E7E7```. I changed mine so it is: ```0xE7E7E7E704```.
+  5. fg
+     
+
+
 
  
