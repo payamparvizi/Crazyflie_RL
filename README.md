@@ -138,3 +138,4 @@ Verify that ```tkinter``` is installed by running:
 
   1. Connect the Crazyflie radio to your laptop or PC.
   2. Turn on the Crazyflie drone
+  3. Check if the Crazyflie can communicate
