@@ -208,3 +208,31 @@ Verify that ```tkinter``` is installed by running:
   ### Connecting with a Flow Deck:
 
   Flow Deck is a sensor that provides the detailed information about the position of the drone. We need to make sure it is connected. 
+  Run the following code:
+
+  ```
+  import logging
+  import time
+  
+  import cflib.crtp
+  from cflib.crazyflie import Crazyflie
+  from cflib.crazyflie.syncCrazyflie import SyncCrazyflie
+  
+  # URI to the Crazyflie to connect to
+  uri = 'radio://0/80/2M/E7E7E7E7E7'
+  
+  def simple_connect():
+  
+      print("Yeah, I'm connected! :D")
+      time.sleep(3)
+      print("Now I will disconnect :'(")
+  
+  if __name__ == '__main__':
+      # Initialize the low-level drivers
+      cflib.crtp.init_drivers()
+  
+      with SyncCrazyflie(uri, cf=Crazyflie(rw_cache='./cache')) as scf:
+  
+          simple_connect()
+  ```
+
