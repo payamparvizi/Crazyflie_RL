@@ -27,9 +27,16 @@ In this work, we used Linux operating system with Python 3.9.20 version. The ins
   pip3 install cfclient
   ```
 
-  Check if it works:
+  Check if it works. Write the below one in the terminal:
   
   ```
   cfclient
   ```
+
+  You will see:
+
+  <p align="center">
+    <img src="https://github.com/user-attachments/assets/e15c1612-ea9d-4a60-ac8f-029d1f8b9d1a" align="center" width="300">
+  </p>
+
   
