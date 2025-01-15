@@ -12,7 +12,7 @@ This project implements the Proximal Policy Optimization (PPO) algorithm for the
 
 This project uses a Linux operating system with Python 3.9.20. Follow the steps below to set up the environment:
 
-1. **Create and activate the environment:**
+### 1. Create and activate the environment:
 
 Open your terminal and run the following commands:
 
@@ -24,14 +24,14 @@ Upgrade ```pip``` and install the necessary modules using:
 
   ```
 
-2. **Install Related Modules:**
+### 2. Install Related Modules:
 
   ```
   pip3 install --upgrade pip
   pip3 install cfclient
   ```
 
-3. **Verify the Installation:**
+### 3. Verify the Installation:
 
   To ensure the installation was successful, run the following command in the terminal:
   
