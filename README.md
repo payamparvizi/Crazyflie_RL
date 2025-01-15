@@ -101,6 +101,12 @@ Verify that ```tkinter``` is installed by running:
 
   #### Download the Firmware:
 
+  Clone the firmware repository
+
+  ```
+  git clone --recursive https://github.com/bitcraze/crazyflie-firmware.git
+  ```
+  
   
 
 
