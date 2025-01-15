@@ -8,6 +8,13 @@ This project implements the Proximal Policy Optimization (PPO) algorithm for the
   <img src="https://github.com/user-attachments/assets/e15c1612-ea9d-4a60-ac8f-029d1f8b9d1a" align="center" width="300">
 </p>
 
+## Requirements:
+
+- Crazyflie 2.1
+- Crazyflie Radio
+- Batteries
+- Flow deck v2
+
 ## Installation Instructions
 
 This project uses a Linux operating system with Python 3.9.20. Follow the steps below to set up the environment:
