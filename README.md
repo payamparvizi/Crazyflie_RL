@@ -251,3 +251,8 @@ Verify that ```tkinter``` is installed by running:
   
   ```
 
+If the FLow Deck connected properly, you will see commands below:
+
+  ```
+  Deck is attached!
+  ```
