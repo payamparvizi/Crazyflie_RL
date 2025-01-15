@@ -1,8 +1,8 @@
-# Reinforcement Learning on Crazyflie 2.1
+# Reinforcement Learning with Crazyflie 2.1
 
 ## Overview 
 
-This code implements the Proximal Policy Optimization (PPO) algorithm for the Crazyflie 2.1 drone. It includes both a simulated environment and a real-world setup for training the PPO algorithm to control the Crazyflie 2.1 to hover at a specific altitude. The figure of the Crazyflie 2.1 is shown below:
+This project implements the Proximal Policy Optimization (PPO) algorithm for the Crazyflie 2.1 drone. It includes both a simulated environment and a real-world setup to train the PPO algorithm for controlling the Crazyflie 2.1 to hover at a specific altitude. Below is an image of the Crazyflie 2.1:
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/e15c1612-ea9d-4a60-ac8f-029d1f8b9d1a" align="center" width="300">
@@ -10,9 +10,13 @@ This code implements the Proximal Policy Optimization (PPO) algorithm for the Cr
 
 ## Installation Instructions
 
-In this work, we used Linux operating system with Python 3.9.20 version. The installation process is as follows:
+This project uses a Linux operating system with Python 3.9.20. Follow the steps below to set up the environment:
 
 1. **Create and activate the environment:**
+
+Open your terminal and run the following commands:
+
+Upgrade ```pip``` and install the necessary modules using:
 
   ```
   conda create --name crazyflie_env python=3.9.20
@@ -27,19 +31,20 @@ In this work, we used Linux operating system with Python 3.9.20 version. The ins
   pip3 install cfclient
   ```
 
-  Check if it works. Write the below one in the terminal:
+3. **Verify the Installation:**
+
+  To ensure the installation was successful, run the following command in the terminal:
   
   ```
   cfclient
   ```
 
-  You will see:
-
+  If the installation is successful, you should see the following interface:
+  
   <p align="center">
     <img src="https://github.com/user-attachments/assets/9d2658ad-227c-4f8a-993d-25e5ca59db67" align="center" width="500">
   </p>
 
-
-  
+  Note: If the command does not work, repeat the steps above until the issue is resolved.
 
   
