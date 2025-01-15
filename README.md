@@ -36,7 +36,10 @@ In this work, we used Linux operating system with Python 3.9.20 version. The ins
   You will see:
 
   <p align="center">
-    <img src="https://github.com/user-attachments/assets/e15c1612-ea9d-4a60-ac8f-029d1f8b9d1a" align="center" width="300">
+    <img src="https://github.com/user-attachments/assets/9d2658ad-227c-4f8a-993d-25e5ca59db67" align="center" width="300">
   </p>
+
+
+  
 
   
