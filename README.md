@@ -197,3 +197,11 @@ Verify that ```tkinter``` is installed by running:
   ```
 
   If any error encountered, it is most probably from URI. Go back to ```cfclient``` interface and check the ```radio``` and ```address``` information and fix the code accordingly. For example, my URI is: ```uri = 'radio://0/100/2M/E7E7E7E704'```.
+
+  If the code works properly, you will see command below:
+  
+  ```
+  Yeah, I'm connected! :D
+  Now I will disconnect :'(
+  ```
+  
