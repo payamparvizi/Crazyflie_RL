@@ -257,6 +257,6 @@ If the FLow Deck connected properly, you will see commands below:
   Deck is attached!
   ```
 
-More detailed infomration is provided in [Step-by-Step: Motion Commander](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/user-guides/sbs_motion_commander/)
+More detailed infomration is provided in [Step-by-Step: Motion Commander](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/user-guides/sbs_motion_commander/).
 
 Now, we are ready for implementations
