@@ -136,4 +136,4 @@ Verify that ```tkinter``` is installed by running:
   
   ## Connecting the Crazyflie and Radio
 
-  1. Connect the crazyflie radio to your laptop/pc.
+  1. Connect the Crazyflie radio to your laptop or PC.
