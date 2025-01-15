@@ -204,4 +204,7 @@ Verify that ```tkinter``` is installed by running:
   Yeah, I'm connected! :D
   Now I will disconnect :'(
   ```
-  
+
+  ### Connecting with a Flow Deck:
+
+  Flow Deck is a sensor that provides the detailed information about the position of the drone. We need to make sure it is connected. 
