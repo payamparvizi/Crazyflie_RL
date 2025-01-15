@@ -160,7 +160,14 @@ Verify that ```tkinter``` is installed by running:
      
 ## Final checks before Implementation
 
-  
+### Connecting with a crazyflie:
+
+  Follow the steps given in the [Step-by-Step: Connecting, logging and parameters](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/user-guides/sbs_connect_log_param/) webpage.
+
+  ```
+  make cf2_defconfig
+  make -j$(nproc)
+  ```
 
 
  
