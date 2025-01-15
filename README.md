@@ -26,3 +26,10 @@ In this work, we used Linux operating system with Python 3.9.20 version. The ins
   pip3 install --upgrade pip
   pip3 install cfclient
   ```
+
+  Check if it works:
+  
+  ```
+  cfclient
+  ```
+  
