@@ -146,4 +146,12 @@ Verify that ```tkinter``` is installed by running:
 
   1. Connect the Crazyflie radio to your laptop or PC.
   2. Turn on the Crazyflie drone
-  3. Check if the Crazyflie can communicate
+  3. Verify communication between the drone and the radio:
+     - Run the following command in the terminal:
+     
+      ```
+      cfclient
+      ```
+  4. 
+
+ 
