@@ -8,3 +8,6 @@ This code implements the PPO algorithm for the Crazyflie 2.1 drone. It includes 
   <img src="https://github.com/user-attachments/assets/e15c1612-ea9d-4a60-ac8f-029d1f8b9d1a" align="center" width="300">
 </p>
 
+## Installation Instructions
+
+dasfasdgf
