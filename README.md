@@ -294,6 +294,15 @@ def move_linear_simple(scf):
         time.sleep(1)
         mc.land()
 
+def param_deck_flow(_, value_str):
+    value = int(value_str)
+    print(value)
+    if value:
+        deck_attached_event.set()
+        print('Deck is attached!')
+    else:
+        print('Deck is NOT attached!')
+
 if __name__ == '__main__':
     cflib.crtp.init_drivers()
 
@@ -308,7 +317,6 @@ if __name__ == '__main__':
             sys.exit(1)
 
         move_linear_simple(scf)
-
   ```
 
 
