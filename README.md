@@ -134,3 +134,4 @@ Verify that ```tkinter``` is installed by running:
 
   If no errors occur, the setup is complete.
   
+  ## Connecting the Crazyflie and Radio
