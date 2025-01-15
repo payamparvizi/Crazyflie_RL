@@ -18,7 +18,7 @@ Open your terminal and run the following commands:
 
 Upgrade ```pip``` and install the necessary modules using:
 
-  ```
+  ```bash
   conda create --name crazyflie_env python=3.9.20
   conda activate crazyflie_env
 
