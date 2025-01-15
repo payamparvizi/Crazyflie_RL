@@ -73,5 +73,9 @@ Upgrade ```pip``` and install the necessary modules using:
 
   Follow the steps outlined in this [installation guide](https://github.com/bitcraze/crazyflie-firmware/blob/master/docs/building-and-flashing/build.md). Let's proceed together!
 
+  #### Install the Dependencies:
   
+  ```
+  sudo apt-get install make gcc-arm-none-eabi
+  ```
 
