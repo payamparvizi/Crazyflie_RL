@@ -45,7 +45,7 @@ Upgrade ```pip``` and install the necessary modules using:
     <img src="https://github.com/user-attachments/assets/9d2658ad-227c-4f8a-993d-25e5ca59db67" align="center" width="500">
   </p>
 
-  Note: If the command does not work, repeat the steps above until the issue is resolved.
+  Note: If the command does not work, repeat the steps above until the issue is resolved or troubleshoot the issue.
 
   ### 4. Download the Crazyflie Firmware:
 
@@ -60,5 +60,14 @@ Upgrade ```pip``` and install the necessary modules using:
   ```
   sudo apt update
   sudo apt install git
+  ```
+
+  Next, create a folder where you want to download the firmware. Use the following commands to set up the directory and download the required files:
+  I created the folder in my Documents
+
+  ```
+  cd /home/payam/Documents
+  mkdir crazyflie_doc
+  cd /home/payam/Documents/crazyflie_doc
   ```
   
