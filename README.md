@@ -321,5 +321,8 @@ if __name__ == '__main__':
 
 ### Logging while Flying:
 
-dsaf
+To check the information of the position and oriantation of the Crazyflie, we need to have log to export it.
+
+
+
 
