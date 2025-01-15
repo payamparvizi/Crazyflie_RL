@@ -109,4 +109,12 @@ Verify that ```tkinter``` is installed by running:
 
   Verify that the firmware has been downloaded by checking the created folder (crazyflie_doc).
 
+  #### Check if installed correctly:
 
+  Follow the codes below to see if you get any errors:
+
+  ```
+  cd crazyflie-firmware
+  git submodule init
+  git submodule update
+  ```
