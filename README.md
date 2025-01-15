@@ -68,7 +68,7 @@ Upgrade ```pip``` and install the necessary modules using:
   ```
   cd /home/payam/Documents
   mkdir crazyflie_doc
-  cd /home/payam/Documents/crazyflie_doc
+  cd crazyflie_doc
   ```
 
   Follow the steps outlined in this [installation guide](https://github.com/bitcraze/crazyflie-firmware/blob/master/docs/building-and-flashing/build.md). Let's proceed together!
@@ -99,14 +99,14 @@ Verify that ```tkinter``` is installed by running:
     <img src="https://github.com/user-attachments/assets/e590f081-c63b-4665-8b51-2dfb0ffb7a84" align="center" width="250">
   </p>
 
-  #### Download the Firmware:
+  #### Clone the Firmware Repository:
 
-  Clone the firmware repository
+  Download the Crazyflie firmware by running the following command:
 
   ```
   git clone --recursive https://github.com/bitcraze/crazyflie-firmware.git
   ```
-  
-  
+
+  Verify that the firmware has been downloaded by checking the created folder (crazyflie_doc).
 
 
