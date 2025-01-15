@@ -71,7 +71,7 @@ Upgrade ```pip``` and install the necessary modules using:
   cd /home/payam/Documents/crazyflie_doc
   ```
 
-  Follow the steps outlined in this [installation guide](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/installation/install/). Let's proceed together!
+  Follow the steps outlined in this [installation guide](https://github.com/bitcraze/crazyflie-firmware/blob/master/docs/building-and-flashing/build.md). Let's proceed together!
 
   
 
