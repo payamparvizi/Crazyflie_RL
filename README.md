@@ -212,27 +212,42 @@ Verify that ```tkinter``` is installed by running:
 
   ```
   import logging
+  import sys
   import time
+  from threading import Event
   
   import cflib.crtp
   from cflib.crazyflie import Crazyflie
+  from cflib.crazyflie.log import LogConfig
   from cflib.crazyflie.syncCrazyflie import SyncCrazyflie
+  from cflib.positioning.motion_commander import MotionCommander
+  from cflib.utils import uri_helper
   
-  # URI to the Crazyflie to connect to
-  uri = 'radio://0/80/2M/E7E7E7E7E7'
+  URI = uri_helper.uri_from_env(default='radio://0/80/2M/E7E7E7E7E7')
   
-  def simple_connect():
+  deck_attached_event = Event()
   
-      print("Yeah, I'm connected! :D")
-      time.sleep(3)
-      print("Now I will disconnect :'(")
+  logging.basicConfig(level=logging.ERROR)
+  
+  def param_deck_flow(_, value_str):
+      value = int(value_str)
+      print(value)
+      if value:
+          deck_attached_event.set()
+          print('Deck is attached!')
+      else:
+          print('Deck is NOT attached!')
+  
   
   if __name__ == '__main__':
-      # Initialize the low-level drivers
       cflib.crtp.init_drivers()
   
-      with SyncCrazyflie(uri, cf=Crazyflie(rw_cache='./cache')) as scf:
+      with SyncCrazyflie(URI, cf=Crazyflie(rw_cache='./cache')) as scf:
   
-          simple_connect()
+          scf.cf.param.add_update_callback(group='deck', name='bcFlow2',
+                                           cb=param_deck_flow)
+          time.sleep(1)
+  
+  
   ```
 
