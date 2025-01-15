@@ -154,8 +154,8 @@ Verify that ```tkinter``` is installed by running:
       ```
   4. In the cfclient interface, press ```scan```. The interface should detect the radio and drone.
      - If the drone isn’t detected, enter the address manually by writing ```0xE7E7E7E7E7```. I changed mine, so the modified address is ```0xE7E7E7E704```.
-     - press ```connect```
-     - If you move the drone, you will start to see changes in the ```Fligh Data``` part
+     - press ```connect```.
+     - If you move the drone, you will start to see changes in the ```Fligh Data``` part.
   5. fg
      
 
