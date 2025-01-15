@@ -290,10 +290,9 @@ def move_linear_simple(scf):
         time.sleep(1)
         mc.forward(0.5)
         time.sleep(1)
-        mc.turn_left(180)
+        mc.back(0.5)
         time.sleep(1)
-        mc.forward(0.5)
-        time.sleep(1)
+        mc.land()
 
 if __name__ == '__main__':
     cflib.crtp.init_drivers()
