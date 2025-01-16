@@ -456,5 +456,5 @@ python train.py --task real --target_altitude 1.0 --action_range 0.20
 ```
 ## Modifying Additional Parameters
 
-ther parameters can also be adjusted in a similar manner using command-line arguments. Alternatively, they can be manually edited in the [arguments.py](./utils/arguments.py) file.
+Other parameters can also be adjusted in a similar manner using command-line arguments. Alternatively, they can be manually edited in the [arguments.py](./utils/arguments.py) file.
 
