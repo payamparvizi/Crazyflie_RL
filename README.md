@@ -11,6 +11,7 @@ This project implements the Proximal Policy Optimization (PPO) algorithm for the
 ## Requirements:
 
 - Linux Opearating System
+- Anaconda Distribution (for managing Python packages and environments)
 - Crazyflie 2.1
 - Crazyflie Radio
 - Flow deck v2
