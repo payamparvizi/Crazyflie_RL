@@ -476,3 +476,5 @@ network.py contains neural networks used to define policy and value function net
 The [networks.py](./ppo/networks.py) file contains the neural network architectures for the policy and value function used in the PPO algorithm. Parameters for these neural networks can be adjusted either in the [arguments.py](./utils/arguments.py) file or directly via the command line.
 
 ### [ppo_agent.py](./ppo/ppo_agent.py)
+
+The [ppo_agent.py](./ppo/ppo_agent.py) file implements the PPO algorithm and manages the training process.
