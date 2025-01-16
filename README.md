@@ -421,8 +421,19 @@ To train the PPO algorithm in the simulated Crazyflie environment, use the follo
 python train.py --task simulation
 ```
 
+
 To train the PPO algorithm in the real-world Crazyflie environment, use this command:
 
 ```
 python train.py --task real
 ```
+
+### Target Altitude:
+
+To specify the desired altitude, use the following command:
+
+```
+python train.py --target_altitude 1.0
+```
+
+In the example above, the target altitude is set to 1 meter.
