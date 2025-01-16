@@ -456,7 +456,7 @@ python train.py --task real --target_altitude 1.0 --action_range 0.20
 ```
 ### Modifying Additional Parameters
 
-Other parameters can also be adjusted in a similar manner using command-line arguments. Alternatively, they can be manually edited in the [arguments.py](./utils/arguments.py) file.
+Other parameters can also be adjusted in a similar manner using command line arguments. Alternatively, they can be manually edited in the [arguments.py](./utils/arguments.py) file.
 
 
 ## How it works
@@ -467,8 +467,12 @@ The [train.py](train.py) file is the main executable responsible for parsing the
 
 ### [arguments.py](./utils/arguments.py)
 
-The [arguments.py](./utils/arguments.py) file defines a set of arguments intended to be parsed from the command line. These arguments are utilized by the [train.py](train.py) file to configure the RL algorithm and the Crazyflie environment. Detailed instructions for using the command-line can be found in the ```Running the RL Environment``` section.
+The [arguments.py](./utils/arguments.py) file defines a set of arguments intended to be parsed from the command line. These arguments are utilized by the [train.py](train.py) file to configure the RL algorithm and the Crazyflie environment. Detailed instructions for using the command line can be found in the ```Running the RL Environment``` section.
 
-### [networks.py](./ppo/networks.py) and [ppo_agent.py](./ppo/ppo_agent.py)
+### [networks.py](./ppo/networks.py)
 
-fsdfs
+network.py contains neural networks used to define policy and value function networks in PPO algorithm. The parameters of the neural networks can be modified from [arguments.py](./utils/arguments.py) file. 
+
+The [networks.py](./ppo/networks.py) file contains the neural network architectures for the policy and value function used in the PPO algorithm. Parameters for these neural networks can be adjusted either in the [arguments.py](./utils/arguments.py) file or directly via the command line.
+
+### [ppo_agent.py](./ppo/ppo_agent.py)
