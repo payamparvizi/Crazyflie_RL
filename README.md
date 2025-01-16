@@ -466,3 +466,6 @@ Other parameters can also be adjusted in a similar manner using command-line arg
 The [train.py](train.py) file serves as the sole executable file responsible for parsing the arguments defined in [arguments.py](./utils/arguments.py). Also, this file initializes both the environment and RL algorithms using the parameters specified within this file.
 
 
+### [arguments.py](./utils/arguments.py)
+
+[arguments.py](./utils/arguments.py) file presents a set of arguments intended to be parsed at the command line. These arguments will be called by the [train.py](train.py) file. This file contains RL algorithm and Crazyflie environment parameters. The instructions for using command lines are detailed in the ```Running the RL environment``` section.
