@@ -413,7 +413,7 @@ logconf.data_received_cb.add_callback(log_pos_callback)
 
 This work utilizes the Proximal Policy Optimization (PPO) algorithm in both simulated and real-world Crazyflie environments to achieve stable hovering at a specified altitude.  
 
-### Simulation or Real Environment
+### Choosing the Environment
 
 To train the PPO algorithm in the simulated Crazyflie environment, use the following command:
 
@@ -428,7 +428,7 @@ To train the PPO algorithm in the real-world Crazyflie environment, use this com
 python train.py --task real
 ```
 
-### Target Altitude:
+### Setting the Target Altitude
 
 To specify the desired altitude, use the following command:
 
@@ -437,3 +437,24 @@ python train.py --target_altitude 1.0
 ```
 
 In the example above, the target altitude is set to 1 meter.
+
+### Defining the Action Range
+
+For safety, it is recommended to specify the maximum allowable velocity (±) for the Crazyflie's actions. Use the following command to define the range:
+
+```
+python train.py --action_range 0.20
+```
+In this example, the maximum velocity is set to 0.20 meters per second.
+
+## Example of a Combined Command
+
+A command that incorporates these parameters might look like this:
+
+```
+python train.py --task real --target_altitude 1.0 --action_range 0.20
+```
+## Modifying Additional Parameters
+
+ther parameters can also be adjusted in a similar manner using command-line arguments. Alternatively, they can be manually edited in the [arguments.py](./utils/arguments.py) file.
+
