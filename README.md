@@ -484,3 +484,6 @@ The [ppo_agent.py](./ppo/ppo_agent.py) file implements the PPO algorithm and man
 
 The [crazyflie_env.py](./crazyflie_env/crazyflie_env.py) file defines the environment used for training with the PPO algorithm. It includes the ```reset()```, ```step()``` , and ```render()```  functions, supporting both ```simulation```  and ```real``` environments. This file specifies the observation space, action space, and reward function, all of which can be customized based on the task.
 
+## Contact
+
+If you have any questions, feel free to email pparv056@uottawa.ca
