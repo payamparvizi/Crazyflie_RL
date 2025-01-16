@@ -463,13 +463,11 @@ Other parameters can also be adjusted in a similar manner using command-line arg
 
 ### [train.py](train.py)
 
-The [train.py](train.py) file serves as the sole executable file responsible for parsing the arguments defined in [arguments.py](./utils/arguments.py). Also, this file initializes both the environment and RL algorithms using the parameters specified within this file.
-
+The [train.py](train.py) file is the main executable responsible for parsing the arguments defined in [arguments.py](./utils/arguments.py). It also initializes both the environment and RL algorithm using the parameters specified in the file.
 
 ### [arguments.py](./utils/arguments.py)
 
-[arguments.py](./utils/arguments.py) file presents a set of arguments intended to be parsed at the command line. These arguments will be called by the [train.py](train.py) file. This file contains RL algorithm and Crazyflie environment parameters. The instructions for using command lines are detailed in the ```Running the RL environment``` section.
-
+The [arguments.py](./utils/arguments.py) file defines a set of arguments intended to be parsed from the command line. These arguments are utilized by the [train.py](train.py) file to configure the RL algorithm and the Crazyflie environment. Detailed instructions for using the command-line can be found in the ```Running the RL Environment``` section.
 
 ### [networks.py](./ppo/networks.py) and [ppo_agent.py](./ppo/ppo_agent.py)
 
