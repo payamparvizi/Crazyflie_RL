@@ -458,3 +458,9 @@ python train.py --task real --target_altitude 1.0 --action_range 0.20
 
 Other parameters can also be adjusted in a similar manner using command-line arguments. Alternatively, they can be manually edited in the [arguments.py](./utils/arguments.py) file.
 
+
+## How it works
+
+### [train.py](train.py)
+
+The [train.py](train.py) file serves as the sole executable file responsible for parsing the arguments defined in [arguments.py](./utils/arguments.py). Also, this file initializes both the environment and RL algorithms using the parameters specified within this file.
