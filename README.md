@@ -469,3 +469,8 @@ The [train.py](train.py) file serves as the sole executable file responsible for
 ### [arguments.py](./utils/arguments.py)
 
 [arguments.py](./utils/arguments.py) file presents a set of arguments intended to be parsed at the command line. These arguments will be called by the [train.py](train.py) file. This file contains RL algorithm and Crazyflie environment parameters. The instructions for using command lines are detailed in the ```Running the RL environment``` section.
+
+
+### [networks.py](./ppo/networks.py) and [ppo_agent.py](./ppo/ppo_agent.py)
+
+fsdfs
