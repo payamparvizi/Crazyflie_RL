@@ -447,14 +447,14 @@ python train.py --action_range 0.20
 ```
 In this example, the maximum velocity is set to 0.20 meters per second.
 
-## Example of a Combined Command
+### Example of a Combined Command
 
 A command that incorporates these parameters might look like this:
 
 ```
 python train.py --task real --target_altitude 1.0 --action_range 0.20
 ```
-## Modifying Additional Parameters
+### Modifying Additional Parameters
 
 Other parameters can also be adjusted in a similar manner using command-line arguments. Alternatively, they can be manually edited in the [arguments.py](./utils/arguments.py) file.
 
