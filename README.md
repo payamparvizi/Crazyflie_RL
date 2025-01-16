@@ -411,15 +411,17 @@ logconf.data_received_cb.add_callback(log_pos_callback)
 
 ## Running the RL Environment
 
-In this work, Proximal Policy Optimization (PPO) algorithm is used in simulated and real-world Crazyflie environment to hover at specific altitude.
+This work utilizes the Proximal Policy Optimization (PPO) algorithm in both simulated and real-world Crazyflie environments to achieve stable hovering at a specified altitude.  
 
-For training PPO algorithm on Simulated Crazyflie:
+### Simulation or Real Environment
+
+To train the PPO algorithm in the simulated Crazyflie environment, use the following command:
 
 ```
 python train.py --task simulation
 ```
 
-For training PPO algorithm on real-world Crazyflie:
+To train the PPO algorithm in the real-world Crazyflie environment, use this command:
 
 ```
 python train.py --task real
