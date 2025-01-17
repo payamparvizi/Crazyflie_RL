@@ -1,0 +1,5 @@
+numpy==1.26.4
+torch==2.5.0
+wandb==0.18.5
+scipy==1.13.1
+cfclient==2024.10
