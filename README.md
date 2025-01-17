@@ -25,8 +25,6 @@ This project uses a Linux operating system with Python 3.9.20. Follow the steps 
 
 Open your terminal and run the following commands:
 
-Upgrade ```pip``` and install the necessary modules using:
-
   ```bash
   conda create --name crazyflie_env python=3.9.20
   conda activate crazyflie_env
@@ -35,11 +33,24 @@ Upgrade ```pip``` and install the necessary modules using:
 
 ### 2. Install Related Modules:
 
+  Upgrade ```pip``` and install the necessary modules using:
   ```
   pip3 install --upgrade pip
   pip3 install cfclient
   ```
 
+  Also, it is recommended to install ```wandb``` module:
+
+  First, sign up for [Wandb website](https://wandb.ai/site/). Then run the following command in the terminal:
+  
+  ```
+  pip3 install wandb
+  wandb login
+  ```
+
+  It will ask for your API. You can find your API through ```User Settings -> API Keys ```.
+  
+  
 ### 3. Verify the Installation:
 
   To ensure the installation was successful, run the following command in the terminal:
