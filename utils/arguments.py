@@ -30,14 +30,4 @@ def get_args():
     parser.add_argument("--action_range", type=float, default=0.2)
     parser.add_argument("--lag_factor", type=float, default=0.1)
     
-    parser.add_argument("--ar_case", type=int, default=0)     # 0:vanilla, 1:CAPS, 2:A2PS
-    
-    parser.add_argument("--noise_a2ps", type=float, default=1e-12)   # 1e-12
-    parser.add_argument("--c_homog", type=float, default=5e3)        # 5e-3
-    parser.add_argument("--lambda_P", type=float, default=1)         # 1
-    
-    parser.add_argument("--lambda_T", type=float, default=1e5)
-    parser.add_argument("--lambda_S", type=float, default=0)  
-    parser.add_argument("--sigma_s_bar", type=float, default=1)
-    
     return parser.parse_args()
