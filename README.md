@@ -420,6 +420,17 @@ if __name__ == '__main__':
 Also, if interested in Roll, Pitch and Yaw orienations of the Crazyflie, replace the position information with orientation, or use both.
 
 ```
+def log_pos_callback(timestamp, data, logconf):
+    print(data)
+    global position_estimate
+    position_estimate[0] = data['stabilizer.roll']
+    position_estimate[1] = data['stabilizer.pitch']
+    position_estimate[2] = data['stabilizer.yaw']
+
+.
+.
+.
+
 logconf = LogConfig(name='Stabilizer', period_in_ms=10)
 logconf.add_variable('stabilizer.roll', 'float')
 logconf.add_variable('stabilizer.pitch', 'float')
