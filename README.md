@@ -35,13 +35,13 @@ Open a terminal and run the following commands:
 
 ### 2. Install Related Modules:
 
-  Upgrade ```pip``` and install the essential modules using:
+  - Upgrade ```pip``` and install the essential modules using:
   ```
   pip3 install --upgrade pip
   pip3 install cfclient
   ```
 
-  Also, it is recommended to install ```wandb``` module:
+  - Also, it is recommended to install ```wandb``` module:
 
   First, sign up on the [Wandb website](https://wandb.ai/site/). Next, run the following commands in your terminal:
   
@@ -52,7 +52,7 @@ Open a terminal and run the following commands:
 
   After running ```wandb login```, it will prompt you for your API key. You can find your API key under User ```User Settings -> API Keys ``` on the [Wandb website](https://wandb.ai/site/). Copy the key and paste it into the terminal when prompted.
 
-  ALso, install  ```torch``` module:
+  - Also, install  ```torch``` module:
   ```
   pip3 install torch==2.5.0
   ```
