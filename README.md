@@ -2,7 +2,7 @@
 
 ## Overview 
 
-This project implements the Proximal Policy Optimization (PPO) algorithm for the Crazyflie 2.1 drone. It includes both a simulated environment and a real-world setup to train the PPO algorithm for controlling the [Crazyflie 2.1](https://www.bitcraze.io/products/old-products/crazyflie-2-1/)  to hover at a specific altitude. Below is an image of the Crazyflie 2.1:
+This project implements the [Proximal Policy Optimization (PPO) algorithm](https://arxiv.org/abs/1707.06347) for the Crazyflie 2.1 drone. It includes both a simulated environment and a real-world setup to train the PPO algorithm for controlling the [Crazyflie 2.1](https://www.bitcraze.io/products/old-products/crazyflie-2-1/)  to hover at a specific altitude. Below is an image of the Crazyflie 2.1:
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/e15c1612-ea9d-4a60-ac8f-029d1f8b9d1a" align="center" width="300">
