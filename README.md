@@ -98,9 +98,9 @@ Open a terminal and run the following commands:
   cd crazyflie_doc
   ```
 
-  Follow the steps outlined in this [installation guide](https://github.com/bitcraze/crazyflie-firmware/blob/master/docs/building-and-flashing/build.md). Let's proceed together!
-
   #### Install the Dependencies:
+
+  Let's follow the steps outlined in this [installation guide](https://github.com/bitcraze/crazyflie-firmware/blob/master/docs/building-and-flashing/build.md). Let's proceed together!
   
   ```
   sudo apt-get install make gcc-arm-none-eabi
