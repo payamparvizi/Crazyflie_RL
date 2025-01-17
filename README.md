@@ -41,7 +41,7 @@ Open your terminal and run the following commands:
 
   Also, it is recommended to install ```wandb``` module:
 
-  First, sign up for [Wandb website](https://wandb.ai/site/). Then run the following command in the terminal:
+  First, sign up in [Wandb website](https://wandb.ai/site/). Then run the following command in the terminal:
   
   ```
   pip3 install wandb
@@ -49,7 +49,6 @@ Open your terminal and run the following commands:
   ```
 
   It will ask for your API. You can find your API through ```User Settings -> API Keys ```.
-  
   
 ### 3. Verify the Installation:
 
