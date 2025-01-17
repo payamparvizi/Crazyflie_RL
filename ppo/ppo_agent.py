@@ -270,16 +270,6 @@ class PPOAgent:
                         # smoothness_value = compute_sm(self.env, self.policy_net)
                         self.save_policy(f"policies_saved/policy_net.pth")
                 
-            # wandb.log({"total_reward": total_reward,
-            #             # "steps": step, 
-            #            "action_fluctuation": self.act_fluc,
-            #            # "K_mean": self.K_mean,
-            #            # "K_act": self.K_act,
-            #             "policy_loss": self.policy_loss,
-            #             "value_loss": self.value_loss,
-            #            # "smoothness value": smoothness_value,
-            #            "average_altitude": average_altitude,
-            #           })
             
             print(f"Episode {episode + 1} done after {step + 1}/{max_steps} steps with total reward: {total_reward}")
             
