@@ -48,7 +48,6 @@ Open a terminal and run the following commands:
   ```
   
   It is recommended to connect the wandb module for logging and experiment tracking. Follow these steps:
-
   First, Sign Up (Create an account) on the [Wandb website](https://wandb.ai/site/). Next, run the following commands in your terminal to connect with the website:
  
   ```
