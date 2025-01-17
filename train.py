@@ -15,7 +15,7 @@ from ppo.ppo_agent import PPOAgent  # Import your PPOAgent class
 
 def train_(args: argparse.Namespace = get_args()) -> None:
     
-    wandb.init(project="crazyflie_test", config=vars(args))
+    wandb.init(project="crazyflie_results", config=vars(args))
     
     seed_value = args.seed
     torch.manual_seed(seed_value)
