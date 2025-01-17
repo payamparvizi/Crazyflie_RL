@@ -1,4 +1,4 @@
-# Reinforcement Learning with Bitcraze Crazyflie 2.1
+# Reinforcement Learning with Proximal Policy Optimization (PPO) algorithm for the Bitcraze Crazyflie 2.1
 
 ## Overview 
 
