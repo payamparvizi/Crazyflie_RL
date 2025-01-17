@@ -35,33 +35,28 @@ Open a terminal and run the following commands:
 
 ### 2. Install Related Modules:
 
-  - Upgrade ```pip``` and install the essential modules using:
+  - Begin by upgrading the ```pip``` module to the latest version. Run the following command in your terminal:
   ```
   pip3 install --upgrade pip
-  pip3 install cfclient
   ```
-
-  Download and unzip this repository. Once done, for example, if the folder is in Downloads, write the command:
+ 
+ Then, download and unzip this repository to your computer. Once unzipped, navigate to the folder. For example, if the folder is located in your Downloads directory, use the following command to change to that directory:
 
   ```
   cd /home/[Your_Name]/Downloads/Crazyflie_RL-main
+  pip3 install -r requirements.txt
   ```
   
-  - Also, it is recommended to install ```wandb``` module:
+  It is recommended to connect the wandb module for logging and experiment tracking. Follow these steps:
 
-  First, sign up on the [Wandb website](https://wandb.ai/site/). Next, run the following commands in your terminal:
-  
+  First, Sign Up (Create an account) on the [Wandb website](https://wandb.ai/site/). Next, run the following commands in your terminal to connect with the website:
+ 
   ```
-  pip3 install wandb
   wandb login
   ```
 
   After running ```wandb login```, it will prompt you for your API key. You can find your API key under User ```User Settings -> API Keys ``` on the [Wandb website](https://wandb.ai/site/). Copy the key and paste it into the terminal when prompted.
-
-  - Also, install  ```torch``` module:
-  ```
-  pip3 install torch==2.5.0
-  ```
+  
   
 ### 3. Verify the Installation:
 
