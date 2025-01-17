@@ -11,16 +11,13 @@ from cflib.utils.power_switch import PowerSwitch
 # import sys
 
 class CrazyflieHoverEnv:
-    def __init__(self, target_altitude, max_steps, alpha=0, noise_threshold=0,
-                 r_max=100, k_rew=66, r_stab=5, action_range=0.2, lag_factor=0.1,
+    def __init__(self, target_altitude, max_steps, noise_threshold=0,
+                 r_stab=5, action_range=0.2, lag_factor=0.1,
                  task='simulation', seed_value=10, aa=0.9, bb=0.9, cc=0.9, dd=0.9):
         
         np.random.seed(seed_value) 
         
-        self.alpha = alpha
         self.noise_threshold = noise_threshold
-        self.r_max = r_max
-        self.k_rew = k_rew
         self.r_stab = r_stab
         self.action_range = action_range
         self.lag_factor = lag_factor
@@ -81,19 +78,6 @@ class CrazyflieHoverEnv:
         """Callback to update the current altitude."""
         if 'stateEstimate.z' in data:
             self.current_altitude = data['stateEstimate.z']
-        
-        # if 'stateEstimate.x' in data:
-        #     self.current_x = data['stateEstimate.x']
-            
-        # if 'stateEstimate.y' in data:
-        #     self.current_y = data['stateEstimate.y']
-
-            # Calibrate initial altitude (set zero reference) at reset
-            # if self.initial_altitude is None:
-            #     self.initial_altitude = current_altitude  # Set the zero reference on reset
-
-            # Adjust the altitude based on the initial zero reference
-            # self.current_altitude = current_altitude - self.initial_altitude
 
         if 'stabilizer.roll' in data:
             self.current_roll = data['stabilizer.roll'] 
@@ -112,18 +96,11 @@ class CrazyflieHoverEnv:
         self.done = False
         self.r_stab_count = 0
         
-        # if len(sys.argv) != 2:
-        #     print("Error: uri is missing")
-        #     print('Usage: {} uri'.format(sys.argv[0]))
-        #     sys.exit(-1)
-        
         if self.task == 'real':
             # PowerSwitch(self.uri).stm_power_cycle()
             sleep(5)
             self.mc.take_off(0.1, 0.2)
             sleep(1)
-
-            
         
         elif self.task == 'simulation':
             self.current_altitude = np.random.uniform(-self.noise_threshold, self.noise_threshold) + 0.1
@@ -135,19 +112,9 @@ class CrazyflieHoverEnv:
 
     def step(self, action):
         
-        velocity_z = np.clip(action, -0.2, 0.2)
+        velocity_z = np.clip(action, -self.action_range, self.action_range)
         # velocity_z = 0.2
         vz = velocity_z.item()
-        
-        # vz = 0.2
-        # vz = 0.2
-
-        # if self.current_altitude > 0.98 and self.current_altitude < 1.02:
-        #     vz = 0
-        # elif self.current_altitude < 0.98:
-        #     vz = 0.2
-        # elif self.current_altitude > 1.02:
-        #     vz = -0.2
         
         if self.task == 'simulation':
             change_x = vz * self.lag_factor
@@ -203,11 +170,8 @@ class CrazyflieHoverEnv:
             
             if self.task == 'real':
                 print('end of the episode')
-                # self.commander.send_velocity_world_setpoint(0, 0, -0.5, 0)
                 self.mc.land(0.5)
                 sleep(3)
-                # self.commander.send_stop_setpoint()
-                # sleep(1)
         
         next_state = np.array([self.current_altitude, vz])
         
