@@ -513,8 +513,6 @@ The [arguments.py](./utils/arguments.py) file defines a set of arguments intende
 
 ### [networks.py](./ppo/networks.py)
 
-network.py contains neural networks used to define policy and value function networks in PPO algorithm. The parameters of the neural networks can be modified from [arguments.py](./utils/arguments.py) file. 
-
 The [networks.py](./ppo/networks.py) file contains the neural network architectures for the policy and value function used in the PPO algorithm. Parameters for these neural networks can be adjusted either in the [arguments.py](./utils/arguments.py) file or directly via the command line.
 
 ### [ppo_agent.py](./ppo/ppo_agent.py)
