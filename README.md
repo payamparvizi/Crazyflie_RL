@@ -41,6 +41,12 @@ Open a terminal and run the following commands:
   pip3 install cfclient
   ```
 
+  Download and unzip this repository. Once done, for example, if the folder is in Downloads, write the command:
+
+  ```
+  cd /home/[Your_Name]/Downloads/Crazyflie_RL-main
+  ```
+  
   - Also, it is recommended to install ```wandb``` module:
 
   First, sign up on the [Wandb website](https://wandb.ai/site/). Next, run the following commands in your terminal:
