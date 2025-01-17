@@ -23,8 +23,7 @@ import pickle
 class PPOAgent:
     def __init__(self, env, policy_lr=1e-4, value_ratio=0.5, gamma=0.99, clip_epsilon=0.2, 
                  update_epochs=10, target_altitude=1.0, entropy_c=0, hidden_size_p=64,
-                 hidden_size_v=64, ar_case=0, noise_a2ps=1e-12, c_homog=10, lambda_P=1e-2,
-                 task='simulation', seed_value=10, lambda_T=0.1, lambda_S=0.1, sigma_s_bar=0.1):
+                 hidden_size_v=64, task='simulation', seed_value=10):
         
         torch.manual_seed(seed_value)
         np.random.seed(seed_value)
@@ -39,16 +38,6 @@ class PPOAgent:
         self.target_altitude = target_altitude
         self.entropy_c = entropy_c
         self.task = task
-        
-        self.ar_case = ar_case
-        self.noise_a2ps = noise_a2ps
-        self.c_homog = c_homog
-        self.lambda_P = lambda_P
-        
-        self.lambda_T = lambda_T
-        self.lambda_S = lambda_S
-        self.sigma_s_bar = sigma_s_bar
-        
         self.value_ratio = value_ratio
 
         # Networks
@@ -180,18 +169,8 @@ class PPOAgent:
             value_loss = torch.nn.MSELoss()(state_values_tensor, returns_tensor)
 
             loss = -torch.min(surr1, surr2).mean() - self.entropy_c * entropy.mean() + self.value_ratio * value_loss
+            policy_loss = loss
             
-            if self.ar_case == 0:
-                policy_loss = loss
-            
-            elif self.ar_case == 1:
-                J_caps = self.ar_caps_fun(states, next_states)
-                policy_loss = loss + J_caps
-                
-            elif self.ar_case == 2:
-                J_a2ps = self.ar_a2ps_fun(states, next_states)
-                policy_loss = loss + J_a2ps
-    
             # Update policy network
             self.policy_optimizer.zero_grad()
             policy_loss.backward(retain_graph=True)  # Retain graph for multiple backward passes
