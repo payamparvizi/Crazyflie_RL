@@ -175,7 +175,13 @@ Verify that ```tkinter``` is installed by running:
 
 ### Connecting with a crazyflie:
 
-  Make sure ```cflib``` has been installed. If not, run the following command:
+  Make sure ```cflib``` has been installed using command:
+
+  ```
+  pip3 show cflib
+  ```
+  
+  If not, run the following command:
 
   ```
   pip3 install cflib
