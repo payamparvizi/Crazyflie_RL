@@ -55,7 +55,7 @@ Open a terminal and run the following commands:
   wandb login
   ```
 
-  After running ```wandb login```, it will prompt you for your API key. You can find your API key under User ```User Settings -> API Keys ``` on the [Wandb website](https://wandb.ai/site/). Copy the key and paste it into the terminal when prompted.
+  After running ```wandb login```, it will prompt you for your API key. You can find your API key under ```User Settings -> API Keys ``` on the [Wandb website](https://wandb.ai/site/). Copy the key and paste it into the terminal when prompted.
   
   
 ### 3. Verify the Installation:
