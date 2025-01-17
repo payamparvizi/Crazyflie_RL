@@ -31,8 +31,7 @@ def train_(args: argparse.Namespace = get_args()) -> None:
     
     # Step 1: InitialiRze the environment
     env = CrazyflieHoverEnv(target_altitude=target_altitude, max_steps=max_steps,
-                            alpha=args.alpha, noise_threshold=args.noise_threshold, 
-                            r_max=args.r_max, k_rew=args.k_rew, r_stab=args.r_stab, 
+                            noise_threshold=args.noise_threshold, r_stab=args.r_stab, 
                             action_range=args.action_range, lag_factor=args.lag_factor, 
                             task=args.task, seed_value=seed_value, aa=args.aa, bb=args.bb, cc=args.cc, dd=args.dd)
     
