@@ -494,7 +494,7 @@ In this example, the maximum velocity is set to 0.20 meters per second.
 A command that incorporates these parameters might look like this:
 
 ```
-python train.py --task real --target_altitude 1.0 --action_range 0.20
+python train.py --task simulation --target_altitude 1.0 --action_range 0.20
 ```
 ### Modifying Additional Parameters
 
