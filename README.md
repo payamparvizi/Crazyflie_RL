@@ -87,7 +87,7 @@ Open your terminal and run the following commands:
   I created the folder in my Documents
 
   ```
-  cd /home/payam/Documents
+  cd /home/[Your_Name]/Documents
   mkdir crazyflie_doc
   cd crazyflie_doc
   ```
@@ -442,6 +442,12 @@ logconf.data_received_cb.add_callback(log_pos_callback)
 ## Running the RL Environment
 
 This work utilizes the Proximal Policy Optimization (PPO) algorithm in both simulated and real-world Crazyflie environments to achieve stable hovering at a specified altitude.  
+
+Download and unzip this repository. Once done, if it is in Downloads for example, write the command:
+
+```
+cd /home/[Your_Name]/Downloads/Crazyflie_RL-main
+```
 
 ### Choosing the Environment
 
