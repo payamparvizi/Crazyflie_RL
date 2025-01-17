@@ -50,7 +50,7 @@ Open your terminal and run the following commands:
   wandb login
   ```
 
-  It will ask for your API. You can find your API through ```User Settings -> API Keys ```.
+  It will ask for your API. You can find your API through ```User Settings -> API Keys ```. Copy and paste it in the terminal
   
 ### 3. Verify the Installation:
 
