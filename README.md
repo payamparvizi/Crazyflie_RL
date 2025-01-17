@@ -21,11 +21,11 @@ This project implements the Proximal Policy Optimization (PPO) algorithm for the
 
 This project uses a Linux operating system with Python 3.9.20. 
 
-It is first recommended to [install Anaconda](https://www.anaconda.com/download) on your laptop/PC. Once done, following the steps below:
+To get started, it is recommended to [install Anaconda](https://www.anaconda.com/download) on your laptop or PC. Once Anaconda is installed, follow the steps below:
 
 ### 1. Create and activate the environment:
 
-Open your terminal and run the following commands:
+Open a terminal and run the following commands:
 
   ```bash
   conda create --name crazyflie_env python=3.9.20
@@ -35,7 +35,7 @@ Open your terminal and run the following commands:
 
 ### 2. Install Related Modules:
 
-  Upgrade ```pip``` and install the necessary modules using:
+  Upgrade ```pip``` and install the essential modules using:
   ```
   pip3 install --upgrade pip
   pip3 install cfclient
@@ -43,14 +43,19 @@ Open your terminal and run the following commands:
 
   Also, it is recommended to install ```wandb``` module:
 
-  First, sign up in [Wandb website](https://wandb.ai/site/). Then run the following command in the terminal:
+  First, sign up on the [Wandb website](https://wandb.ai/site/). Next, run the following commands in your terminal:
   
   ```
   pip3 install wandb
   wandb login
   ```
 
-  It will ask for your API. You can find your API through ```User Settings -> API Keys ```. Copy and paste it in the terminal
+  After running ```wandb login```, it will prompt you for your API key. You can find your API key under User ```User Settings -> API Keys ``` on the [Wandb website](https://wandb.ai/site/). Copy the key and paste it into the terminal when prompted.
+
+  ALso, install  ```torch``` module:
+  ```
+  pip3 install torch==2.5.0
+  ```
   
 ### 3. Verify the Installation:
 
