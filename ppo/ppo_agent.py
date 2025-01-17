@@ -94,47 +94,6 @@ class PPOAgent:
         K_mu = mu_fluc/obs_fluc
         
         return act_fluc.mean(), K_act.mean(), K_mu.mean()
-    
-    
-    def ar_a2ps_fun(self, states, next_states):
-        
-        mean, act, _ = self.action_sampling(states)
-        mean_next, act_next, _ = self.action_sampling(next_states)
-        
-        obs = states.squeeze()
-        obs_next = next_states.squeeze()
-        
-        noise_size = mean.shape[0]
-        noise = self.noise_a2ps * torch.abs(torch.randn(noise_size))
-        noise2 = self.noise_a2ps * torch.abs(torch.randn(noise_size))
-        
-        # calculate the Euclidean distance for temporal and spatial smoothness:
-        DT = torch.norm(mean - mean_next, p=2, dim=-1).cpu() + noise
-        DO = torch.norm(obs - obs_next, p=2, dim=-1).cpu().mean(dim=-1) + noise2
-        
-        DP = abs(torch.log(self.c_homog * DT/DO))
-        
-        J_pym = self.lambda_P * DP
-        return J_pym.mean()
-
-    def ar_caps_fun(self, states, next_states):
-        
-        mean, act, _ = self.action_sampling(states)
-        mean_next, act_next, _ = self.action_sampling(next_states)
-        
-        obs = states.squeeze()
-        obs_next = next_states.squeeze()
-
-        obs_bar = obs + self.sigma_s_bar * torch.randn_like(obs)
-
-        mean_bar, act_bar, _ = self.action_sampling(obs_bar)
-        
-        # calculate the Euclidean distance for temporal and spatial smoothness:
-        DT = torch.norm(mean - mean_next, p=2, dim=-1)
-        DS = torch.norm(mean - mean_bar, p=2, dim=-1)
-        
-        J_caps = self.lambda_T * DT + self.lambda_S * DS
-        return J_caps.mean()
 
     def update_policy(self, states, actions, old_log_probs, returns, advantages, rewards, next_states):
         """Update the policy using PPO."""
