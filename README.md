@@ -19,7 +19,7 @@ This project implements the Proximal Policy Optimization (PPO) algorithm for the
 
 ## Installation Instructions
 
-This project uses a Linux operating system with Python 3.9.20. Follow the steps below to set up the environment:
+This project uses a Linux operating system with Python 3.9.20. It is first recommended to [install Anaconda](https://www.anaconda.com/download) on your laptop/PC. 
 
 ### 1. Create and activate the environment:
 
