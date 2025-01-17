@@ -19,13 +19,9 @@ def get_args():
     parser.add_argument("--entropy_c", type=float, default=0)
     parser.add_argument("--hidden_size_p", type=int, default=64)
     parser.add_argument("--hidden_size_v", type=int, default=64)
-    parser.add_argument("--alpha", type=float, default=0.0)
     parser.add_argument("--noise_threshold", type=float, default=0.01)
     
-    parser.add_argument("--r_max", type=int, default=1)
-    parser.add_argument("--k_rew", type=int, default=1)
     parser.add_argument("--r_stab", type=int, default=5)
-    
     parser.add_argument("--aa", type=float, default=4)
     parser.add_argument("--bb", type=float, default=1)
     parser.add_argument("--cc", type=float, default=0.5)
