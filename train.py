@@ -31,10 +31,10 @@ def train_(args: argparse.Namespace = get_args()) -> None:
     
     # Step 1: InitialiRze the environment
     env = CrazyflieHoverEnv(target_altitude=target_altitude, max_steps=max_steps,
-                            noise_threshold=args.noise_threshold, 
-                            r_stab=args.r_stab, 
+                            noise_threshold=args.noise_threshold, r_stab=args.r_stab, 
                             action_range=args.action_range, lag_factor=args.lag_factor, 
-                            task=args.task, seed_value=seed_value, aa=args.aa, bb=args.bb, cc=args.cc, dd=args.dd)
+                            task=args.task, seed_value=seed_value, aa=args.aa, bb=args.bb, 
+                            cc=args.cc, dd=args.dd)
     
     # Step 2: Create a PPOAgent
     agent = PPOAgent(env=env, policy_lr=args.policy_lr, value_lr=args.value_lr, value_ratio=args.value_ratio, gamma=args.gamma, 
