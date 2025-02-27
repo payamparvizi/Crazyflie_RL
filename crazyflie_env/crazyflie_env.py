@@ -13,7 +13,7 @@ from cflib.utils.power_switch import PowerSwitch
 class CrazyflieHoverEnv:
     def __init__(self, target_altitude, max_steps, noise_threshold=0,
                  r_stab=5, action_range=0.2, lag_factor=0.1,
-                 task='simulation', seed_value=10, aa=0.9, bb=0.9, cc=0.9, dd=0.9):
+                 task='simulation', seed_value=10, aa=0, bb=0, cc=0, dd=0):
         
         np.random.seed(seed_value) 
         
@@ -35,11 +35,10 @@ class CrazyflieHoverEnv:
         self.current_altitude = 0.0  # The calibrated altitude
         self.done = False
         
-        
         if self.task == 'real':
             
             # Initialize the Crazyflie
-            uri = uri_helper.uri_from_env(default='radio://0/100/2M/E7E7E7E704')
+            uri = uri_helper.uri_from_env(default='radio://0/100/2M/E7E7E7E701')
             
             self.uri = uri
             cflib.crtp.init_drivers()
@@ -78,6 +77,19 @@ class CrazyflieHoverEnv:
         """Callback to update the current altitude."""
         if 'stateEstimate.z' in data:
             self.current_altitude = data['stateEstimate.z']
+        
+        # if 'stateEstimate.x' in data:
+        #     self.current_x = data['stateEstimate.x']
+            
+        # if 'stateEstimate.y' in data:
+        #     self.current_y = data['stateEstimate.y']
+
+            # Calibrate initial altitude (set zero reference) at reset
+            # if self.initial_altitude is None:
+            #     self.initial_altitude = current_altitude  # Set the zero reference on reset
+
+            # Adjust the altitude based on the initial zero reference
+            # self.current_altitude = current_altitude - self.initial_altitude
 
         if 'stabilizer.roll' in data:
             self.current_roll = data['stabilizer.roll'] 
@@ -96,11 +108,22 @@ class CrazyflieHoverEnv:
         self.done = False
         self.r_stab_count = 0
         
+        self._e = 0
+        self.prev_vz = 0
+        self._ee = 1
+        
+        # if len(sys.argv) != 2:
+        #     print("Error: uri is missing")
+        #     print('Usage: {} uri'.format(sys.argv[0]))
+        #     sys.exit(-1)
+        
         if self.task == 'real':
             # PowerSwitch(self.uri).stm_power_cycle()
-            sleep(5)
+            sleep(2)
             self.mc.take_off(0.1, 0.2)
             sleep(1)
+
+            
         
         elif self.task == 'simulation':
             self.current_altitude = np.random.uniform(-self.noise_threshold, self.noise_threshold) + 0.1
@@ -113,7 +136,7 @@ class CrazyflieHoverEnv:
     def step(self, action):
         
         velocity_z = np.clip(action, -self.action_range, self.action_range)
-        # velocity_z = 0.2
+
         vz = velocity_z.item()
         
         if self.task == 'simulation':
@@ -170,8 +193,11 @@ class CrazyflieHoverEnv:
             
             if self.task == 'real':
                 print('end of the episode')
+                # self.commander.send_velocity_world_setpoint(0, 0, -0.5, 0)
                 self.mc.land(0.5)
                 sleep(3)
+                # self.commander.send_stop_setpoint()
+                # sleep(1)
         
         next_state = np.array([self.current_altitude, vz])
         
@@ -180,6 +206,7 @@ class CrazyflieHoverEnv:
 
     def compute_reward(self, vz, z):
         
+        vz_diff = -abs(vz - self.prev_vz)
         altitude_error = z - self.target_altitude
         
         # Altitude penalty (closer to target is better)
@@ -202,17 +229,23 @@ class CrazyflieHoverEnv:
             reward_bonus = 0
             self.r_stab_count = 0
         
+        self.prev_vz = vz
+        
         # Total reward
         a = self._a
         b = self._b
         c = self._c
         d = self._d
         
-        total_reward =  (a)   *   reward_altitude + \
+        total_reward =  (1* self._ee)   *   reward_altitude + \
                         (b)   *   reward_direction + \
                         (c)   *   reward_bonus + \
-                        (d)   *   self.r_stab_count*self.r_stab
+                        (d)   *   self.r_stab_count*self.r_stab +\
+                        (self._e)   *   vz_diff/(2*self.action_range)
 
+        self._e = self._e
+        self._ee = self._ee + a
+        
         return total_reward
         # return reward
         
