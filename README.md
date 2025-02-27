@@ -526,7 +526,7 @@ The [crazyflie_env.py](./crazyflie_env/crazyflie_env.py) file defines the enviro
 ## Results
 
 <img src="https://github.com/user-attachments/assets/57f98914-fb42-44f2-af27-04c2d0a01b44" width="400">
-<img src="https://github.com/user-attachments/assets/264a62ce-1a46-4522-a31b-923de4d89dbf" width="500">
+<img src="https://github.com/user-attachments/assets/264a62ce-1a46-4522-a31b-923de4d89dbf" width="450">
 
 ## Contact
 
